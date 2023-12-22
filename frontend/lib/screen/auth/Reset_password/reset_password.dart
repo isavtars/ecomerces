@@ -61,8 +61,8 @@ class ResetPassword extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: CustomeInputs(
                       hintText: "password",
                       credentials: true,
@@ -72,8 +72,8 @@ class ResetPassword extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: CustomeInputs(
                       hintText: "Confirm_password",
                       credentials: true,

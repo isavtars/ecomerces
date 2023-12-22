@@ -5,15 +5,16 @@ import 'package:frontend/utils/extension.dart';
 import '../../utils/constance/app_colors.dart';
 
 class CustomeInputs extends StatefulWidget {
-  const CustomeInputs(
-      {super.key,
-      this.textEditingController,
-      required this.hintText,
-      required this.icons,
-      this.validators,
-      required this.textinputTypes,
-      this.credentials = false,
-      this.inputFormatters});
+  const CustomeInputs({
+    super.key,
+    this.textEditingController,
+    required this.hintText,
+    required this.icons,
+    this.validators,
+    required this.textinputTypes,
+    this.credentials = false,
+    this.inputFormatters,
+  });
 
   final TextEditingController? textEditingController;
   final String hintText;

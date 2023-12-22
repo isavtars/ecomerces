@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/controller/auth_controller.dart';
 import 'package:frontend/utils/extension.dart';
+import 'package:get/get.dart';
 
 import '../../../utils/constance/app_colors.dart';
 
@@ -16,10 +18,12 @@ class RegisterScreen extends StatefulWidget {
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
+final authController = Get.put(AuthController());
+
 final nameController = TextEditingController();
 final emailController = TextEditingController();
 final passwordController = TextEditingController();
-final confirmpassword = TextEditingController();
+final formKey = GlobalKey<FormState>();
 
 class _RegisterScreenState extends State<RegisterScreen> {
   @override
@@ -53,42 +57,63 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(
                       height: 14,
                     ),
-                    CustomeInputs(
-                        hintText: "YourName",
-                        icons: Icons.person,
-                        textEditingController: nameController,
-                        textinputTypes: TextInputType.text),
-                    const SizedBox(
-                      height: 14,
-                    ),
-                    CustomeInputs(
-                        hintText: "Email",
-                        icons: Icons.email,
-                        textEditingController: emailController,
-                        textinputTypes: TextInputType.text),
-                    const SizedBox(
-                      height: 14,
-                    ),
-                    CustomeInputs(
-                        hintText: "Password",
-                        icons: FontAwesomeIcons.lock,
-                        textEditingController: passwordController,
-                        credentials: true,
-                        textinputTypes: TextInputType.text),
-                    const SizedBox(
-                      height: 14,
-                    ),
-                    CustomeInputs(
-                        hintText: "Confirm-password",
-                        icons: FontAwesomeIcons.lock,
-                        credentials: true,
-                        textEditingController: confirmpassword,
-                        textinputTypes: TextInputType.text),
+                    Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            CustomeInputs(
+                                hintText: "YourName",
+                                textEditingController: nameController,
+                                icons: Icons.person,
+                                validators: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter some text';
+                                  }
+                                  return null;
+                                },
+                                textinputTypes: TextInputType.text),
+                            const SizedBox(
+                              height: 14,
+                            ),
+                            CustomeInputs(
+                              hintText: "Email",
+                              icons: Icons.email,
+                              textinputTypes: TextInputType.text,
+                              textEditingController: emailController,
+                              validators: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter some text';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(
+                              height: 14,
+                            ),
+                            CustomeInputs(
+                              hintText: "Password",
+                              icons: FontAwesomeIcons.lock,
+                              textEditingController: passwordController,
+                              credentials: true,
+                              textinputTypes: TextInputType.text,
+                              validators: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter some text';
+                                }
+                                return null;
+                              },
+                            ),
+                          ],
+                        )),
                     const SizedBox(
                       height: 14,
                     ),
                     Row(children: [
-                      Checkbox(value: true, onChanged: (bool) {}),
+                      Checkbox(
+                          value: true,
+                          onChanged: (value) {
+                            setState(() {});
+                          }),
                       Expanded(
                         child: Text(
                           "I agree to the terms and conditions ",
@@ -108,7 +133,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             btnTitle: "SignUp",
                             width: width,
                             height: height,
-                            onPressed: () {})),
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                authController.signUP(
+                                    name: nameController.text,
+                                    email: emailController.text,
+                                    password: passwordController.text);
+                              }
+                            })),
                     const SizedBox(
                       height: 15,
                     ),
