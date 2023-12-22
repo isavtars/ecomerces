@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 import 'screen/auth/signUp/register_screen.dart';
 import 'utils/constance/router_const.dart';
 
-void main() {
+void main() async {
+  // await GetStorage.init();
   runApp(
     const MyScreen(),
   );
@@ -29,7 +30,7 @@ class MyScreen extends StatelessWidget {
 
 List<GetPage<dynamic>> meroRoutes() {
   return [
-    GetPage(name: FlutterEcomerce.home, page: () => const LoginScreen()),
+    GetPage(name: FlutterEcomerce.home, page: () => const RegisterScreen()),
     GetPage(name: FlutterEcomerce.register, page: () => const RegisterScreen()),
     GetPage(name: FlutterEcomerce.login, page: () => const LoginScreen()),
   ];

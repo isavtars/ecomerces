@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/utils/extension.dart';
+import 'package:get/get.dart';
 
+import '../../../controller/auth_controller.dart';
 import '../../../utils/constance/app_colors.dart';
 import '../../../utils/constance/router_const.dart';
 import '../../widgets/custome_btns.dart';
@@ -16,9 +18,19 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-final TextEditingController email = TextEditingController();
-
 class _LoginScreenState extends State<LoginScreen> {
+  final authController = Get.put(AuthController());
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _email.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     dynamic size, height, width;
@@ -47,20 +59,40 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     logoheader(context),
-                    CustomeInputs(
-                      hintText: "Emaill",
-                      icons: FontAwesomeIcons.mailchimp,
-                      textinputTypes: TextInputType.emailAddress,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    CustomeInputs(
-                      hintText: "password",
-                      icons: FontAwesomeIcons.lock,
-                      credentials: true,
-                      textinputTypes: TextInputType.emailAddress,
-                    ),
+                    Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            CustomeInputs(
+                              hintText: "Emaill",
+                              textEditingController: _email,
+                              icons: FontAwesomeIcons.mailchimp,
+                              textinputTypes: TextInputType.emailAddress,
+                              validators: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter some text';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            CustomeInputs(
+                              hintText: "password",
+                              textEditingController: _password,
+                              icons: FontAwesomeIcons.lock,
+                              credentials: true,
+                              textinputTypes: TextInputType.emailAddress,
+                              validators: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter some text';
+                                }
+                                return null;
+                              },
+                            ),
+                          ],
+                        )),
                     const SizedBox(
                       height: 8,
                     ),
@@ -85,10 +117,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: 0.8.w(context),
                         height: 0.07.h(context),
                         child: CustomBtn(
-                            btnTitle: "Login",
+                            btnTitle: "Loginfff",
                             width: width,
                             height: height,
-                            onPressed: () {})),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                authController.login(
+                                    context: context,
+                                    email: _email.text,
+                                    password: _password.text);
+                              }
+                            })),
                     const SizedBox(
                       height: 15,
                     ),

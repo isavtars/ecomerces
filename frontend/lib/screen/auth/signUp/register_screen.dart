@@ -18,14 +18,23 @@ class RegisterScreen extends StatefulWidget {
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-final authController = Get.put(AuthController());
-
-final nameController = TextEditingController();
-final emailController = TextEditingController();
-final passwordController = TextEditingController();
-final formKey = GlobalKey<FormState>();
-
 class _RegisterScreenState extends State<RegisterScreen> {
+  final authController = Get.put(AuthController());
+
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     dynamic size, height, width;
@@ -136,6 +145,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
                                 authController.signUP(
+                                    context: context,
                                     name: nameController.text,
                                     email: emailController.text,
                                     password: passwordController.text);

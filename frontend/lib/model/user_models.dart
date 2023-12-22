@@ -7,8 +7,14 @@ class UserModel {
   final List cart;
   final String type;
 
-  UserModel(this.id, this.address, this.cart, this.type,
-      {required this.name, required this.email, required this.password});
+  UserModel(
+      {required this.id,
+      required this.name,
+      required this.email,
+      required this.password,
+      required this.address,
+      required this.cart,
+      required this.type});
 
   Map<String, dynamic> tojson() => {
         "id": id,
@@ -19,4 +25,16 @@ class UserModel {
         "cart": cart,
         "type": type
       };
+
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    List cart = json['cart'] is List ? json['cart'] : [];
+    return UserModel(
+        id: json['id'],
+        name: json['name'],
+        email: json['email'],
+        password: json['password'],
+        address: json['address'],
+        cart: json['cart'] ?? [],
+        type: json['type']);
+  }
 }
