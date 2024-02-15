@@ -35,20 +35,21 @@ class _HomeScreenState extends State<HomeScreen> {
         width: double.infinity,
         padding: EdgeInsets.all(0.033.toResponsive(context)),
         child: Column(children: [
+          Obx(() => Text(authCtrl.myusers.value.token)),
           Text("This_home_pages",
               style: GoogleFonts.poppins(
                   fontSize: 0.015.toResponsive(context), color: kBlack)),
-          Text(authCtrl.users.token),
+          // Text(authCtrl.users.token),
           ElevatedButton(
               onPressed: () async {
                 SharedPreferences pre = await SharedPreferences.getInstance();
 
-                setState(() async {
-                  token = (await pre.getString(tokenxauth))!;
+                setState(() {
+                  token = (pre.getString(tokenxauth))!;
                   log('this is my key from the local storages  $token');
                 });
               },
-              child: Text("Button")),
+              child: const Text("Button")),
           Text(token)
         ]),
       ),

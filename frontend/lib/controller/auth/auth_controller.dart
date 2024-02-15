@@ -1,23 +1,28 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
-
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:frontend/app/constance/global_variable/global_variable.dart';
 import 'package:frontend/model/user_models.dart';
-
 import 'package:frontend/app/api/api_handles.dart';
 import 'package:frontend/app/api/error_handling.dart';
 import 'package:frontend/app/routes/router_const.dart';
-
 import 'package:get/get.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
+
+  Rx<UsersModels> myusers = UsersModels(
+      token: "",
+      id: "",
+      name: "",
+      email: "",
+      password: "",
+      address: "",
+      type: "",
+      cart: []).obs;
 
   UsersModels users = UsersModels(
       token: "",
@@ -99,7 +104,14 @@ class AuthController extends GetxController {
           context: context,
           onSuccess: () async {
             var data = jsonDecode(res.body);
+            log("$data");
+
+            UsersModels userdata = UsersModels.fromJson(data);
+
+            log(userdata.token);
+
             users = UsersModels.fromJson(data);
+            myusers = UsersModels.fromJson(data).obs;
 
             SharedPreferences prefs = await SharedPreferences.getInstance();
             await prefs.setString(tokenxauth, data['token']);

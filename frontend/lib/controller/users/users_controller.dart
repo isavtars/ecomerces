@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class UsersController extends GetxController {
   static UsersController instance = Get.find();
 
-  UsersModels _users = UsersModels(
+  final UsersModels _users = UsersModels(
       token: "",
       id: "",
       name: "",
@@ -14,10 +14,8 @@ class UsersController extends GetxController {
       type: "",
       cart: []);
 
+  UsersModels get users => _users;
 
-      UsersModels get users=>_users;
-
-  
   // setUsers(String user) {
   //   _users = UsersModels.fromJson(user);
   //   update();

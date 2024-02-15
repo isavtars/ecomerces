@@ -61,8 +61,8 @@ class ForgetPassworScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(20),
+              const   Padding(
+                  padding: EdgeInsets.all(20),
                   child: CustomeInputs(
                       hintText: "Email",
                       icons: Icons.email,
