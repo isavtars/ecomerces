@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:frontend/utils/extension.dart';
+import 'package:frontend/app/constance/extensions/extension.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/auth_controller.dart';
-import '../../../utils/constance/app_colors.dart';
-import '../../../utils/constance/router_const.dart';
+import '../../../controller/auth/auth_controller.dart';
+import '../../../app/styles/app_colors.dart';
+import '../../../app/routes/router_const.dart';
 import '../../widgets/custome_btns.dart';
 import '../../widgets/custome_inputs.dart';
 import '../../widgets/logo_header.dart';
@@ -124,8 +124,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (_formKey.currentState!.validate()) {
                                 authController.login(
                                     context: context,
-                                    email: _email.text,
-                                    password: _password.text);
+                                    email: _email.text.trim(),
+                                    password: _password.text.trim());
                               }
                             })),
                     const SizedBox(

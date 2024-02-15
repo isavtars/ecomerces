@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/utils/constance/app_images.dart';
-import 'package:frontend/utils/extension.dart';
+import 'package:frontend/app/assets/app_images.dart';
+import 'package:frontend/app/constance/extensions/extension.dart';
 
 Container logoheader(BuildContext context) {
   return Container(

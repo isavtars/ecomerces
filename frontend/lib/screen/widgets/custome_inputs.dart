@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:frontend/utils/extension.dart';
+import 'package:frontend/app/constance/extensions/extension.dart';
 
-import '../../utils/constance/app_colors.dart';
+import '../../app/styles/app_colors.dart';
 
 class CustomeInputs extends StatefulWidget {
   const CustomeInputs({
@@ -34,9 +34,9 @@ class _CustomeInputsState extends State<CustomeInputs> {
   Widget build(BuildContext context) {
     return Container(
       height: 0.075.h(context),
-      padding: const EdgeInsets.all(17),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(0.007.toResponsive(context)),
         color: inputcolor,
       ),
       child: TextFormField(

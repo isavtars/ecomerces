@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:frontend/controller/auth_controller.dart';
-import 'package:frontend/utils/extension.dart';
+import 'package:frontend/controller/auth/auth_controller.dart';
+import 'package:frontend/app/constance/extensions/extension.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/constance/app_colors.dart';
+import '../../../app/styles/app_colors.dart';
 
-import '../../../utils/constance/router_const.dart';
+import '../../../app/routes/router_const.dart';
 import '../../widgets/custome_btns.dart';
 import '../../widgets/custome_inputs.dart';
 import '../../widgets/logo_header.dart';

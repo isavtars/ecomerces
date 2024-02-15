@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../utils/constance/app_colors.dart';
+import '../../app/styles/app_colors.dart';
 
 class SocialLoginBtn extends StatelessWidget {
   const SocialLoginBtn({super.key, required this.icons});

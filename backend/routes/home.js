@@ -4,9 +4,14 @@ const homeRouter = express.Router();
 
 
 
+
+homeRouter.get("/",(req,res)=>{
+    res.send("heloo from home");
+})
+
 homeRouter.get("/home",(req,res)=>{
 
-    res.send("heloo from home")
+    res.send("heloo from home");
 
 })
 

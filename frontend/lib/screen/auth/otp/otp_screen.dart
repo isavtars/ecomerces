@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/utils/extension.dart';
+import 'package:frontend/app/constance/extensions/extension.dart';
 
-import '../../../utils/constance/app_colors.dart';
+import '../../../app/styles/app_colors.dart';
 import '../../widgets/custome_btns.dart';
 
 class OtpScreen extends StatelessWidget {
