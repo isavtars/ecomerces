@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:frontend/app/constance/global_variable/global_variable.dart';
+import 'package:frontend/app/manager/constance/global_variable.dart';
 import 'package:frontend/model/user_models.dart';
-import 'package:frontend/app/api/api_handles.dart';
-import 'package:frontend/app/api/error_handling.dart';
+import 'package:frontend/app/manager/api/api_handles.dart';
+import 'package:frontend/app/manager/api/error_handling.dart';
 import 'package:frontend/app/routes/router_const.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -14,7 +14,34 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
 
-  Rx<UsersModels> myusers = UsersModels(
+  //veriFiedToken
+  veriFiedToken() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String mytoken = prefs.getString(tokenxauth) ?? "Empty Token";
+
+      log("this is ls token $mytoken");
+
+      if (mytoken.isNotEmpty) {
+        http.Response res = await http.post(Uri.parse('$uri/tokenIsValid'),
+            headers: {"x-auth-token": mytoken});
+        log('this is the token verified response $res');
+        var response = jsonDecode(res.body);
+
+        if (response == true) {
+          Get.toNamed(FlutterEcomerce.home);
+        } else {
+          Get.toNamed(FlutterEcomerce.login);
+        }
+      } else {
+        log("no token  saved in ls");
+      }
+    } catch (err) {
+      log(err.toString());
+    }
+  }
+
+  Rx<UsersModels> users = UsersModels(
       token: "",
       id: "",
       name: "",
@@ -23,16 +50,6 @@ class AuthController extends GetxController {
       address: "",
       type: "",
       cart: []).obs;
-
-  UsersModels users = UsersModels(
-      token: "",
-      id: "",
-      name: "",
-      email: "",
-      password: "",
-      address: "",
-      type: "",
-      cart: []);
 
   signUP(
       {required String name,
@@ -98,36 +115,31 @@ class AuthController extends GetxController {
             'Content-Type': 'application/json; charset=UTF-8',
           });
 
-      // ignore: use_build_context_synchronously
-      httpErrorHandle(
-          response: res,
-          context: context,
-          onSuccess: () async {
-            var data = jsonDecode(res.body);
-            log("$data");
+      if (context.mounted) {
+        httpErrorHandle(
+            response: res,
+            context: context,
+            onSuccess: () async {
+              var data = jsonDecode(res.body);
 
-            UsersModels userdata = UsersModels.fromJson(data);
+              users = UsersModels.fromJson(data).obs;
 
-            log(userdata.token);
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              await prefs.setString(tokenxauth, data['token']);
 
-            users = UsersModels.fromJson(data);
-            myusers = UsersModels.fromJson(data).obs;
+              Fluttertoast.showToast(
+                  msg: 'Login Sucess',
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
 
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            await prefs.setString(tokenxauth, data['token']);
-
-            Fluttertoast.showToast(
-                msg: 'Login Sucess',
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.CENTER,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Colors.red,
-                textColor: Colors.white,
-                fontSize: 16.0);
-
-            Future.delayed(const Duration(milliseconds: 3000));
-            Get.toNamed(FlutterEcomerce.home);
-          });
+              Future.delayed(const Duration(milliseconds: 3000));
+              Get.toNamed(FlutterEcomerce.home);
+            });
+      }
     } catch (err) {
       Fluttertoast.showToast(
           msg: err.toString(),

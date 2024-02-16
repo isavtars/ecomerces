@@ -2,10 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-import 'package:frontend/app/constance/global_variable/global_variable.dart';
+import 'package:frontend/app/manager/constance/global_variable.dart';
 import 'package:frontend/app/styles/app_colors.dart';
 import 'package:frontend/controller/auth/auth_controller.dart';
 import 'package:frontend/controller/global/controller.dart';
+import 'package:frontend/controller/users/users_controller.dart';
 import 'package:frontend/screen/widgets/extension_responsive.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,6 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     Get.put(AuthController());
+    Get.put(UsersController());
+    userCtrl.getUsers();
     super.initState();
   }
 
@@ -35,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
         width: double.infinity,
         padding: EdgeInsets.all(0.033.toResponsive(context)),
         child: Column(children: [
-          Obx(() => Text(authCtrl.myusers.value.token)),
+          Obx(() => Text(authCtrl.users.value.token)),
           Text("This_home_pages",
               style: GoogleFonts.poppins(
                   fontSize: 0.015.toResponsive(context), color: kBlack)),
@@ -46,11 +49,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 setState(() {
                   token = (pre.getString(tokenxauth))!;
-                  log('this is my key from the local storages  $token');
+                  // log('this is my key from the local storages  $token');
                 });
               },
               child: const Text("Button")),
-          Text(token)
         ]),
       ),
     );

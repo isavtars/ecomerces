@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/app/constance/extensions/extension.dart';
+import 'package:frontend/app/manager/constance/extensions/extension.dart';
 
 import '../../../app/styles/app_colors.dart';
 import '../../widgets/custome_btns.dart';
