@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:frontend/app/manager/api/api_handles.dart';
+import 'package:frontend/app/manager/constance/global_variable.dart';
 import 'package:frontend/app/manager/peferences/preferences_manager.dart';
 import 'package:frontend/model/user_models.dart';
 import 'package:get/get.dart';
@@ -24,14 +24,13 @@ class UsersController extends GetxController {
     try {
       String token = await Preferences.getToken() ?? "Empty token";
       log('this is the token from ls $token');
+      //have to verified toke and then get
       if (token.isNotEmpty) {
         http.Response res = await http
-            .get(Uri.parse('$uri/getUsers'), headers: {'x-auth-token': token});
-
+            .get(Uri.parse('$uri/getUsers'), headers: {tokenxauth: token});
         var data = jsonDecode(res.body);
-        log(' this is the res data ${res.body}');
         users = UsersModels.fromJson(data);
-        log(' this is the users $users');
+        log("usersId ${users.id}");
       } else {
         log("there is no any token");
       }

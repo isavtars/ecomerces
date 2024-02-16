@@ -1,1 +1,1 @@
-const String tokenxauth = "token_x_auth";
+const String tokenxauth = "x-auth-token";

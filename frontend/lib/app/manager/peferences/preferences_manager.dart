@@ -12,11 +12,9 @@ class Preferences {
 
   static Future<String?> getToken() async {
     String getToken = '';
-
     SharedPreferences prefs = await SharedPreferences.getInstance();
     getToken =
         prefs.getString(PreferencesConstant.authTokenConstant) ?? "Empty token";
-
     return getToken;
   }
 }

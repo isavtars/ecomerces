@@ -1,6 +1,6 @@
 class FlutterEcomerce {
   const FlutterEcomerce._();
-  static const String home = "/home";
+  static const String usersHome = "/users-home";
   static const String login = "/login";
   static const String register = "/register";
   static const String optscreen = "/otpscreen";

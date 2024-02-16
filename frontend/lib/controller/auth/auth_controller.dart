@@ -14,10 +14,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
 
+  var isTokenVerified = false.obs;
+
   //login Te
-
-
-
 
   //veriFiedToken
   veriFiedToken() async {
@@ -25,16 +24,13 @@ class AuthController extends GetxController {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String mytoken = prefs.getString(tokenxauth) ?? "Empty Token";
 
-      log("this is ls token $mytoken");
-
       if (mytoken.isNotEmpty) {
         http.Response res = await http.post(Uri.parse('$uri/tokenIsValid'),
             headers: {"x-auth-token": mytoken});
-        log('this is the token verified response $res');
         var response = jsonDecode(res.body);
 
         if (response == true) {
-          Get.toNamed(FlutterEcomerce.home);
+          Get.toNamed(FlutterEcomerce.usersHome);
         } else {
           Get.toNamed(FlutterEcomerce.login);
         }
@@ -46,15 +42,15 @@ class AuthController extends GetxController {
     }
   }
 
-  Rx<UsersModels> users = UsersModels(
-      token: "",
-      id: "",
-      name: "",
-      email: "",
-      password: "",
-      address: "",
-      type: "",
-      cart: []).obs;
+  // Rx<UsersModels> users = UsersModels(
+  //     token: "",
+  //     id: "",
+  //     name: "",
+  //     email: "",
+  //     password: "",
+  //     address: "",
+  //     type: "",
+  //     cart: []).obs;
 
   signUP(
       {required String name,
@@ -127,7 +123,7 @@ class AuthController extends GetxController {
             onSuccess: () async {
               var data = jsonDecode(res.body);
 
-              users = UsersModels.fromJson(data).obs;
+              // users = UsersModels.fromJson(data).obs;
 
               SharedPreferences prefs = await SharedPreferences.getInstance();
               await prefs.setString(tokenxauth, data['token']);
@@ -142,7 +138,7 @@ class AuthController extends GetxController {
                   fontSize: 16.0);
 
               Future.delayed(const Duration(milliseconds: 3000));
-              Get.toNamed(FlutterEcomerce.home);
+              Get.toNamed(FlutterEcomerce.usersHome);
             });
       }
     } catch (err) {
