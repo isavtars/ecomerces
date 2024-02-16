@@ -4,6 +4,8 @@ class ApiHandle {
 }
 
 String ipAddress = '192.168.1.67';
+String ipAddressPc = '192.168.89.69';
+
 int port = 3000;
 
-String uri = 'http://$ipAddress:$port';
+String uri = 'http://$ipAddressPc:$port';

@@ -37,23 +37,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic size, height, width;
-    size = MediaQuery.of(context).size;
-    height = size.height;
-    width = size.width;
-
     return Scaffold(
       body: SafeArea(
         child: Stack(children: [
           Container(
-            height: height,
-            width: width,
+            height: 1.0.h(context),
+            width: 1.0.w(context),
             color: primarycolors,
           ),
           Positioned(
-              top: 140,
+              top: 0.14.h(context),
               height: 0.8.h(context),
-              width: width,
+              width: 0.47.w(context),
               child: Container(
                 margin: const EdgeInsets.all(20),
                 padding: const EdgeInsets.all(10),
@@ -140,8 +135,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 0.07.h(context),
                         child: CustomBtn(
                             btnTitle: "SignUp",
-                            width: width,
-                            height: height,
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
                                 authController.signUP(

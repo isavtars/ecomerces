@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
         width: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 0.033.w(context)),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Image.asset(AppImages.amazonlogo),
+          Image.asset(amazonlogo),
           Container(
             alignment: Alignment.center,
             child: const CircularProgressIndicator(),

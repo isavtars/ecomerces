@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/app/manager/assets/app_images.dart';
+
 import 'package:frontend/app/manager/constance/extensions/extension.dart';
 
 Container logoheader(BuildContext context) {
@@ -10,8 +11,8 @@ Container logoheader(BuildContext context) {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(
-          child: SizedBox(
-              height: 1.0.w(context), child: Image.asset(AppImages.amazonlogo)),
+          child:
+              SizedBox(height: 1.0.w(context), child: Image.asset(amazonlogo)),
         ),
         // Text(
         //   "Ecomerces",

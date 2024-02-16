@@ -33,23 +33,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic size, height, width;
-    size = MediaQuery.of(context).size;
-    height = size.height;
-    width = size.width;
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
           children: [
             Container(
-              height: height,
-              width: width,
+              height: 1.0.h(context),
+              width: 1.0.w(context),
               color: primarycolors,
+              padding: EdgeInsets.symmetric(horizontal: 0.033.h(context)),
             ),
             Positioned(
-              top: 140,
-              height: 0.70.h(context),
-              width: width,
+              top: 0.14.h(context),
+              height: 0.74.h(context),
+              width: 0.47.w(context),
               child: Container(
                 margin: const EdgeInsets.all(20),
                 padding: const EdgeInsets.all(10),
@@ -100,8 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.bottomRight,
                       child: TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(
-                              context, FlutterEcomerce.forgetpassword);
+                          Get.toNamed(FlutterEcomerce.forgetpassword);
                         },
                         child: Text(
                           "Forget Password??",
@@ -113,21 +109,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-                    SizedBox(
-                        width: 0.8.w(context),
-                        height: 0.07.h(context),
-                        child: CustomBtn(
-                            btnTitle: "Loginfff",
-                            width: width,
-                            height: height,
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                authController.login(
-                                    context: context,
-                                    email: _email.text.trim(),
-                                    password: _password.text.trim());
-                              }
-                            })),
+                    CustomBtn(
+                        btnTitle: "Login",
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            authController.login(
+                                context: context,
+                                email: _email.text.trim(),
+                                password: _password.text.trim());
+                          }
+                        }),
                     const SizedBox(
                       height: 15,
                     ),

@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/app/routes/app_routes_mange.dart';
 import 'package:frontend/controller/auth/auth_controller.dart';
-import 'package:frontend/screen/auth/signin/login_screen.dart';
-import 'package:frontend/screen/home/home_screen.dart';
 import 'package:frontend/screen/splashscreen/splash_screen.dart';
-
 import 'package:get/get.dart';
-
-import 'screen/auth/signUp/register_screen.dart';
-import 'app/routes/router_const.dart';
 
 void main() async {
   // await GetStorage.init();
@@ -29,12 +24,4 @@ class MyScreen extends StatelessWidget {
       getPages: meroRoutes(),
     );
   }
-}
-
-List<GetPage<dynamic>> meroRoutes() {
-  return [
-    GetPage(name: FlutterEcomerce.home, page: () => const HomeScreen()),
-    GetPage(name: FlutterEcomerce.login, page: () => const LoginScreen()),
-    GetPage(name: FlutterEcomerce.register, page: () => const RegisterScreen()),
-  ];
 }

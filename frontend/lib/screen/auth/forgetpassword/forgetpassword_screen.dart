@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/app/manager/assets/app_images.dart';
 import 'package:frontend/app/manager/constance/extensions/extension.dart';
 
 import '../../../app/styles/app_colors.dart';
@@ -13,29 +14,19 @@ class ForgetPassworScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-            width: double.maxFinite,
+            width: double.infinity,
+            height: double.infinity,
             color: primarycolors,
+            padding: EdgeInsets.symmetric(horizontal: 0.033.w(context)),
             child: Column(
-              // crossAxisAlignment: ,
               children: [
-                const Center(
-                    child: Padding(
-                  padding: EdgeInsets.only(top: 8.0),
-                  child: Text(
-                    "Forget Password",
-                    style: secondText,
-                  ),
-                )),
-                const SizedBox(
-                  height: 20,
-                ),
                 SizedBox(
                   height: 0.3.h(context),
                   width: 1.0.w(context),
-                  child: Image.asset("assets/images/forgetpassword.png"),
+                  child: Image.asset(amazonlogo),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 0.020.h(context),
                 ),
                 Container(
                   padding: const EdgeInsets.all(20),
@@ -46,8 +37,8 @@ class ForgetPassworScreen extends StatelessWidget {
                         style: myTextStyle(
                             textColor, 0.022.toResponsive(context), "Kalnia"),
                       ),
-                      const SizedBox(
-                        height: 10,
+                      SizedBox(
+                        height: 0.010.h(context),
                       ),
                       Text(
                         "Enter your Email addres we will provide the password restlink in your email",
@@ -58,27 +49,17 @@ class ForgetPassworScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-              const   Padding(
-                  padding: EdgeInsets.all(20),
-                  child: CustomeInputs(
-                      hintText: "Email",
-                      icons: Icons.email,
-                      textinputTypes: TextInputType.emailAddress),
-                ),
                 SizedBox(
-                  height: 0.0003.h(context),
+                  height: 0.010.h(context),
                 ),
+                const CustomeInputs(
+                    hintText: "Email",
+                    icons: Icons.email,
+                    textinputTypes: TextInputType.emailAddress),
                 SizedBox(
-                  width: 0.9.w(context),
-                  height: 0.07.h(context),
-                  child: CustomBtn(
-                      btnTitle: "Send invitation",
-                      width: 370,
-                      onPressed: () {}),
-                )
+                  height: 0.03.h(context),
+                ),
+                CustomBtn(btnTitle: "Send invitation", onPressed: () {})
               ],
             )),
       ),

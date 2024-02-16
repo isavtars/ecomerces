@@ -14,6 +14,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
 
+  //login Te
+
+
+
+
   //veriFiedToken
   veriFiedToken() async {
     try {

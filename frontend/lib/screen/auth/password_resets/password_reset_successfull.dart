@@ -68,7 +68,6 @@ class PasswordResetSucessFull extends StatelessWidget {
               child: CustomBtn(
                 btnTitle: "Continue to Accounts",
                 onPressed: () {},
-                width: 370,
               ),
             ),
             const SizedBox(

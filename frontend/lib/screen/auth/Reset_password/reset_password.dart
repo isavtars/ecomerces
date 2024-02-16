@@ -89,7 +89,7 @@ class ResetPassword extends StatelessWidget {
                   child: CustomBtn(
                     btnTitle: "Change password",
                     onPressed: () {},
-                    width: 370,
+                    
                   ),
                 )
               ],

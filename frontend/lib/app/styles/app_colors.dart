@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 const Color kWhite = Color(0xffffffff);
 const Color kBlack = Color(0xff000000);
+const Color borderColor = Color.fromARGB(255, 161, 161, 161);
 
 const Color primarycolors = Color(0xff292F3D);
 const Color secondarycolors = Color.fromARGB(255, 68, 75, 90);
